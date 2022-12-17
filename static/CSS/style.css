@@ -31,12 +31,16 @@ border-radius: 40px;
     margin-top: 7rem !important;
 }
 .mt-10{
+
     margin-top: 10rem !important;
 }
 @media (min-width: 992px) {
     .mt-lg-0{
         margin-top: 0rem !important;
     }
+
+    margin-top: 12rem !important;
+
 }
 /* button*/
 
@@ -70,11 +74,13 @@ h1, .h1, h2, .h2, h3, h4, h5, h6 {
     margin-top: 0;
     margin-bottom: 0.5rem;
      font-family: "Inter", sans-serif;
+
     /*font-weight: 600;*/
     line-height: 1.4;
     color: #2113C1;
   }
   
+
   h2, .h2 {
     font-size: calc(2.0625rem + 0.75vw);
   }
