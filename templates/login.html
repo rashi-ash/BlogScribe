@@ -1,9 +1,11 @@
 {% load static%}
 {% include "base.html"%} 
-
+{% include "navbar.html"%}
 <!-- login -->
-<div class="container  ">
-   <div class="row login ">
+<div class="container mt-10">
+
+
+   <div class="row login mt-10 ">
 
      <div class="col-4 ">
        <img src="{% static 'images/blog.png' %}" alt="blog" class="img-fluid rounded">
@@ -61,7 +63,7 @@
              </div>
 
              <!-- Submit button -->
-             <button type="submit" name="login" class="btn btn-primary btn-block mb-4">Sign in</button>
+             <button type="submit" name="login" class="btn btnn-primary btn-block mb-4">Sign in</button>
 
              <!-- Register buttons -->
              <div class="text-center">
@@ -103,7 +105,7 @@
              </div>
 
              <!-- Submit button -->
-             <button type="submit" class="btn btn-primary btn-block mb-3">Sign in</button>
+             <button type="submit" class="btn btn-block mb-3 btnn-primary">Sign in</button>
            </form>
          </div>
        </div>

@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 from PIL import Image
 # Create your models here.
 class BlogModel (models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE ,null=True, blank=True)
+    image=models.ImageField(upload_to='images', null=True, blank=True)
     title = models.CharField(max_length=255)
     desc = RichTextField()
     addedtime=models.DateTimeField(auto_now_add=True, blank=True)
@@ -21,4 +22,5 @@ class BlogModel (models.Model):
             img.thumbnail(output_size)
             img.save(self.image.path)
        
+
 

@@ -1,9 +1,51 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from .models import BlogModel
+from .form import BlogForm
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import UserCreationForm  
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-def index(request):
-    return render(request,'index.html')
-
-
 def login(request):
-    return render(request,'login.html')
+    form = UserCreationForm()
+    if request.method == 'POST':
+        if 'login' in request.POST:
+            print('login')
+            username1 = request.POST['user-email']
+            password = request.POST['password']
+            user = authenticate(request, username=username1, password=password)
+            if user is not None:
+                login(request)
+                return redirect('index')
+        else:
+            print('register')
+            print(request.POST)
+            form = UserCreationForm(request.POST)
+            if form.is_valid():
+                print('its Valid')
+                form.save()
+
+    return render(request, 'index.html', context={
+        'form': form
+    })
+@login_required
+def index(request):
+      x=''
+      if request.method == 'POST':
+        BlogModel.objects.create(title=request.POST['title'], desc=request.POST['desc'], image='./images/bg2.jpg')
+        x=BlogModel.objects.order_by('-updatedtime')[:4]
+      return render(request,'index.html',{ 
+        'blogModel': x,
+        'form': BlogForm()
+        }
+      )
+
+
+# def login(request):
+#     return render(request,'login.html')
+def blog(request, id):
+    x = BlogModel.objects.get(id=id)
+    return render(request,'blog.html', {
+        'data': x 
+    })

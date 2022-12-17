@@ -1,117 +1,88 @@
-
 {% load static %}
 {%include "base.html"%}
-<div class="bg-image bgimg vh-100" 
-     style="background-image: url('{% static 'images/bg2.png' %}') ">
-            {% include "navbar.html" %}
-            <div class="container mt-5">
-            <div class="row">
-                <div class="col-8 h1 mt-5 " >
-                    <h1 class="mt-5 mb-5 text-white">Introduction</h1>
-                    <h5 class="h5 text-white">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</h5>
-                </div>
+<div class="bg-image bgimg vh-100" style="background-image: url('{% static 'images/bg2.png' %}') ">
+    {% include "navbar.html" %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-8 h1 mt-5 ">
+                <h1 class="mt-5 mb-5 text-white">Introduction</h1>
+                <h5 class="h5 text-white">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
+                    printer took a galley of type and scrambled it to make a type specimen book.</h5>
             </div>
-          </div>
-   </div>
-   <section>
+        </div>
+    </div>
+</div>
+<section>
     <section id="blog" class="mt-5">
         <div class="container">
-          <div class="row align-items-center">
-            <!-- Heading -->
-            <h2>Blog Category List</h2>
-            <!-- End Heading -->
-            <div class="overflow-hidden">
-                <!-- Row Start-->
-              <div class="row mt-4">
-                <!-- Column Start-->
-                <div class="col-lg-3 col-sm-6 col-12">
-                    <div class="item card rounded-7 mb-3 pb-2 overflow-hidden bg-primarys">
-                        <img src="{% static 'images/bg2.png' %}" alt="blog">
-                        <div class="card-body text-left h-100">
-                            <h4 class="d-inline-block  card-text mb-0">Title</h4>
-                            <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. 
-                            </p>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <p class="card-text">date</p>
-                                    </div>
-                                    <div class="col-6">
-                                        <button class="btn btn-primary" type="button">Read More</button>
-                                    </div>
+            <div class="row align-items-center">
+                <!-- Heading -->
+                <h2>Blog Category List</h2>
+                <!-- End Heading -->
+                <div class="overflow-hidden">
+                    <!-- Row Start-->
+                    <div class="row mt-4">
+                      
+
+                        <!-- The Modal -->
+                        <button type="button" class="btn btnn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            New Card
+                          </button>
+                          
+                          <!-- Modal -->
+                          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Column Ends-->
-                <!-- Column Start-->
-                <div class="col-lg-3 col-sm-6 col-12">
-                    <div class="item card rounded-7 mb-3 pb-2 overflow-hidden bg-primarys">
-                        <img src="{% static 'images/bg2.png' %}" alt="blog">
-                        <div class="card-body text-left h-100">
-                            <h4 class="d-inline-block  card-text mb-0">Title</h4>
-                            <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                            <div class="row">
-                                <div class="col-6">
-                                    <p class="card-text">date</p>
-                                </div>
-                                <div class="col-6">
-                                    <button class="btn btn-primary" type="button">Read More</button>
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                  <div class="modal-body">
+                                    {{form}}
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Create</button>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- BlogModel --> 
+                          {% for x in blogModel %}
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            
+                            <div class="item card rounded-7 mb-3 pb-2 overflow-hidden bg-primarys">
+                                {% comment %} <img src="{% static 'images/bg2.png' %}" alt="blog"> {% endcomment %}
+                                <img src="{{x.image.url }}" class="img-fluid" />
+                                <div class="card-body text-left h-100">
+                                    <h4 class="d-inline-block  card-text mb-0">{{x.title}}</h4>
+                                    <p class="card-text">{{x.desc |truncatechars:64 | safe}}
+                                    </p>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p class="card-text"> {{x.addedtime}}</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <a href="{% url 'blog' x.id %}" class="btn btn-primary">Button</a>
+                                            {% comment %} <button class="btn btn-primary" type="button">Read
+                                                More</button> {% endcomment %}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+  
                         </div>
+                        {% endfor %}
+                         
                     </div>
+           
                 </div>
-                <!-- Column Ends-->
-                <!-- Column Start-->
-                <div class="col-lg-3 col-sm-6 col-12">
-                    <div class="item card rounded-7 mb-3 pb-2 overflow-hidden bg-primarys">
-                        <img src="{% static 'images/bg2.png' %}" alt="blog">
-                        <div class="card-body text-left h-100">
-                            <h4 class="d-inline-block  card-text mb-0">Title</h4>
-                            <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                            <div class="row">
-                                <div class="col-6">
-                                    <p class="card-text">date</p>
-                                </div>
-                                <div class="col-6">
-                                    <button class="btn btn-primary" type="button">Read More</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Column Ends-->
-                <!-- Column Start-->
-                <div class="col-lg-3 col-sm-6 col-12">
-                    <div class="item card rounded-7 mb-3 pb-2 overflow-hidden bg-primarys">
-                        <img src="{% static 'images/bg2.png' %}" alt="blog">
-                        <div class="card-body text-left h-100">
-                            <h4 class="d-inline-block  card-text mb-0">Title</h4>
-                            <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <p class="card-text">date</p>
-                                    </div>
-                                    <div class="col-6">
-                                        <button class="btn btn-primary" type="button">Read More</button>
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Column Ends-->
-              </div>
-              <!-- Row Start-->
-            </div>             
-            <!-- End Card Info -->
-          </div>
+              
+            </div>
         </div>
-      </section>
-      <!--{{data.image.url}}
-        {{data.title}}
-        {{data.desc}}
-    -->
+    </section>
+   
