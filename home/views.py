@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm  
 from django.contrib.auth.decorators import login_required
 
+
 # Create your views here.
 def login(request):
     form = UserCreationForm()
@@ -16,6 +17,7 @@ def login(request):
             password = request.POST['password']
             user = authenticate(request, username=username1, password=password)
             if user is not None:
+                print('login none')
                 login(request)
                 return redirect('index')
         else:
@@ -26,15 +28,23 @@ def login(request):
                 print('its Valid')
                 form.save()
 
-    return render(request, 'index.html', context={
+    return render(request, 'login.html', {
         'form': form
     })
-@login_required
+
+
+# def index2(request):
+#     return redirect('index2', id=1)
 
 def about(request):
     return render(request,'about.html')
 def contact(request):
     return render(request,'contact.html')
+def blogs(request):
+   
+    return render(request,'blogs.html')
+
+
 def index(request):
       x=''
       if request.method == 'POST':
@@ -45,6 +55,7 @@ def index(request):
         'form': BlogForm()
         }
       )
+
 
 
 # def login(request):

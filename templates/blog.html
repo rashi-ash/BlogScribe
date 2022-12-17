@@ -1,15 +1,36 @@
+{% load static %}
 {% include "base.html"%}
-{% include "navbar.html"%}
+<section>
+<div class="container">
+  {% include "navbar.html"%}
 
-<div class="card mb-3">
-    <img src="{{data.image.url}}" class="card-img-top" alt="Wild Landscape"/>
-    <div class="card-body">
-      <h5 class="card-title">{{data.title}}</h5>
-      <p class="card-text">
-        {{data.desc}}
-      </p>
-      <p class="card-text">
-        <small class="text-muted"> {{data.addedtime}}</small>
-      </p>
+  <div class="row mt-7">
+    <div class="col-3">
+      <p>Name</p>
+    </div>
+    <div class="col-9">
+      <div class=" mb-3 ">
+        <div class="row">
+          <div class="col-lg-8 col-12">
+            <img src="{{data.image.url}}" class="card-img-top" alt="Wild Landscape"/>
+          </div>
+          <div class="col-lg-12 col-12">
+            <div class="card-body">
+              <h5 class="card-title">{{data.title}}</h5>
+              <p class="card-text">
+                {{data.desc | safe}}
+              </p>
+              <p class="card-text">
+                <small class="text-muted"> {{data.addedtime}}</small>
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        
+      </div>
     </div>
   </div>
+  
+</div>
+</section>

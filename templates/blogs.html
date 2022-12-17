@@ -1,0 +1,26 @@
+       {% load static %}
+       {% include 'base.html'%}
+       {% for x in blogModel %}
+                        <div class="col-lg-3 col-sm-6 col-12"> 
+                            <div class="item card rounded-7 mb-3 pb-2 overflow-hidden bg-primarys">
+                                {% comment %} <img src="{% static 'images/bg2.png' %}" alt="blog"> {% endcomment %}
+                                <img src="{{x.image.url }}" class="img-fluid" />
+                                <div class="card-body text-left h-100">
+                                    <h4 class="d-inline-block  card-text mb-0">{{x.title}}</h4>
+                                    <p class="card-text">{{x.desc |truncatechars:64 | safe}}
+                                    </p>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p class="card-text"> {{x.addedtime}}</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <a href="{% url 'blog' x.id %}" class="btn btn-primary">Button</a>
+                                            {% comment %} <button class="btn btn-primary" type="button">Read
+                                                More</button> {% endcomment %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                         

@@ -20,34 +20,35 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </span>
             </button>
-            <a href="" class="btn btn-sm  bg-white rounded-pill mb-0 ms-auto d-lg-none d-block h1">BlogScribe</a>
+            <a href="{% url 'login'%}" class="btn btn-sm  bg-white rounded-pill mb-0 ms-auto d-lg-none d-block h1">BlogScribe</a>
             <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0 navbar-wrapper-flex-end collapse"
               id="navigation">
               <ul class="navbar-nav navbar-nav-hover ml-auto ">
                 <li class="nav-item mx-2">
-                  <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer" role="button">
+                  <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer" href="{% url 'index' %}" role="button" >
                     Home
                   </a>
                 </li>
 
+                {% comment %} 
                 <li class="nav-item mx-2">
-                  <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer " role="button">
+                  <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer" href="{% url ''%}" role="button">
                     Service
                   </a>
-                </li>
+                </li> {% endcomment %}
                 <li class="nav-item mx-2">
-                  <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer " role="button">
+                  <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer" href="{% url 'blogs'%}" role="button">
                     Blogs
                   </a>
                 </li>
 
                 <li class="nav-item mx-2">
-                  <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer ">
+                  <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer" href="{% url 'about'%}">
                     About Us
                   </a>
                 </li>
                 <li class="nav-item mx-2">
-                  <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer ">
+                  <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer" href="{% url 'contact'%}">
                     Contact Us
                   </a>
                 </li>
