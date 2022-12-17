@@ -30,7 +30,12 @@ def login(request):
         'form': form
     })
 @login_required
-def index(request):
+
+def about(request):
+    return render(request,'about.html')
+def contact(request):
+    return render(request,'contact.html')
+
       x=''
       if request.method == 'POST':
         BlogModel.objects.create(title=request.POST['title'], desc=request.POST['desc'], image='./images/bg2.jpg')
@@ -49,3 +54,4 @@ def blog(request, id):
     return render(request,'blog.html', {
         'data': x 
     })
+
