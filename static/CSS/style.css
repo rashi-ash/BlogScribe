@@ -1,0 +1,25 @@
+.navbar-wrapper-flex-end{
+    display: flex;
+    justify-content: end;
+}
+.texte{
+    color: #1F2F98;
+}
+.navbar{
+border-radius: 40px;
+}
+.contexte{
+  background: linear-gradient(90deg, #433FEA 0%, rgba(15, 63, 136, 0.72) 80.25%);
+    color: #ffffff;
+}
+#contexte{
+    background-color: #EDF2FB;
+}
+.navbar .logo-texte {
+    color: #1F2F98;
+    
+}
+
+.navbar .nav-link {
+    color: #ffffff;
+}
