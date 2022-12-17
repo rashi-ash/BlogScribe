@@ -35,7 +35,7 @@ def about(request):
     return render(request,'about.html')
 def contact(request):
     return render(request,'contact.html')
-
+def index(request):
       x=''
       if request.method == 'POST':
         BlogModel.objects.create(title=request.POST['title'], desc=request.POST['desc'], image='./images/bg2.jpg')
