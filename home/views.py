@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import BlogModel
+from .models import BlogModel, CommentModel
 from .form import BlogForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
@@ -71,8 +71,13 @@ def index(request):
 #     return render(request,'login.html')
 def blog(request, id):
     x = BlogModel.objects.get(id=id)
+    if request.method == 'POST':
+        message = request.POST['message']
+        if message.strip() != "":
+                CommentModel.objects.create(message=message, user=request.user, blog=BlogModel.objects.get(id=request.POST['blog'])) 
     return render(request,'blog.html', {
-        'data': x 
+        'data': x,
+        'comments': CommentModel.objects.filter(blog=BlogModel.objects.get(id=id))
     })
 
 def blog_delete(request, id):
