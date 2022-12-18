@@ -52,6 +52,19 @@
                     Contact Us
                   </a>
                 </li>
+                {% if request.user.is_authenticated %}
+                <li class="nav-item mx-2">
+                  <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer" href="{% url 'logout'%}">
+                    Log Out
+                  </a>
+                </li>
+                {% else %}
+                <li class="nav-item mx-2">
+                  <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer" href="{% url 'login'%}">
+                    Log in
+                  </a>
+                </li>
+                {% endif %}
               </ul>
             </div>
           </div>

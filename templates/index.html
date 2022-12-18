@@ -4,14 +4,13 @@
 <div class="bg-image bgimg vh-100" style="background-image: url('{% static 'images/bg2.png' %}') ">
   {% include "navbar.html" %}
   <div class="container mt-5">
-    <div class="row">
-      <div class="col-8 h1 mt-5 ">
-        <h1 class="mt-5 mb-5 text-white">Blog scribe </h1>
-        <h5 class="h5 text-white">Inscribe is the practice of making the best ideas, the most obvious.
-          Publish your passions in your own way.
-          Create a unique and beautiful blog easily.</h5>
+    <div class="row align-items-center mx-auto justify-content-center">
+      <div class="col-8 h1 mt-5  text-start">
+        <h1 class="mt-5 mb-5 text-white">Blog Scribe </h1>
+        <h2 class="h3 text-white">Inscribe is the practice of making the best ideas <span class="d-sm-inline d-none">, <br> the most obvious.
+          Publish your passions in your own way. <br>
+          Create a unique and beautiful blog easily.</span></h2>
       </div>
-
     </div>
   </div>
 </div>
@@ -29,10 +28,11 @@
 
 
             <!-- The Modal -->
+            {% if request.user.is_authenticated %}
             <button type="button" class="btn btnn-primary mb-4" data-bs-toggle="modal" data-bs-target="#myModal">
               New Card
             </button>
-
+            {% endif %}
             <!-- Modal -->
             <!-- The Modal -->
             <div class="modal" id="myModal">
@@ -55,7 +55,7 @@
                   </div>
 
                   <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Create</button>
+                    <button type="submit" class="btn btn-success" name='create-blog' data-bs-dismiss="modal">Create</button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                   </div>
                   </form>
@@ -80,7 +80,11 @@
                       <p class="card-text"> {{x.addedtime}}</p>
                     </div>
                     <div class="col-6">
-                      <a href="{% url 'blog' x.id %}" class="btn btn-primary">Button</a>
+                      <a href="{% url 'blog' x.id %}" class="btn btn-primary">More</a>
+
+                      {% if request.user == x.user %}
+                      <a href="{% url 'blog-delete' x.id %}" class="btn btn-danger">Delete</a>
+                      {% endif %}
                       {% comment %} <button class="btn btn-primary" type="button">Read
                         More</button> {% endcomment %}
                     </div>
@@ -90,7 +94,7 @@
 
             </div>
             {% endfor %}
-
+            <a class="btn btn-info" href="{% url 'blogs' %}">Show more</a>
           </div>
 
         </div>

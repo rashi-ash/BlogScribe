@@ -2,7 +2,9 @@ from django.shortcuts import render,redirect
 from .models import BlogModel
 from .form import BlogForm
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm  
 from django.contrib.auth.decorators import login_required
 
@@ -17,8 +19,7 @@ def login(request):
             password = request.POST['password']
             user = authenticate(request, username=username1, password=password)
             if user is not None:
-                print('login none')
-                login(request)
+                auth_login(request, user)
                 return redirect('index')
         else:
             print('register')
@@ -32,7 +33,9 @@ def login(request):
         'form': form
     })
 
-
+def logoutview(request):
+    logout(request)
+    return redirect('login')
 # def index2(request):
 #     return redirect('index2', id=1)
 
@@ -41,15 +44,21 @@ def about(request):
 def contact(request):
     return render(request,'contact.html')
 def blogs(request):
-   
-    return render(request,'blogs.html')
+    return render(request,'blogs.html', {
+        'blogs': BlogModel.objects.order_by('-updatedtime')
+    })
 
 
 def index(request):
-      x=''
+    #   x=BlogModel.objects.all()
       if request.method == 'POST':
-        BlogModel.objects.create(title=request.POST['title'], desc=request.POST['desc'], image='./images/bg2.jpg')
-        x=BlogModel.objects.order_by('-updatedtime')[:4]
+        
+        if 'create-blog' in request.POST:
+            
+            BlogModel.objects.create(title=request.POST['title'], desc=request.POST['desc'], image='./images/bg2.jpg', user=request.user)
+        
+      
+      x=BlogModel.objects.order_by('-updatedtime')[:4]
       return render(request,'index.html',{ 
         'blogModel': x,
         'form': BlogForm()
@@ -65,4 +74,8 @@ def blog(request, id):
     return render(request,'blog.html', {
         'data': x 
     })
+
+def blog_delete(request, id):
+    BlogModel.objects.get(id=id).delete()
+    return redirect('index')
 
