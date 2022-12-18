@@ -55,7 +55,7 @@ def index(request):
         
         if 'create-blog' in request.POST:
             
-            BlogModel.objects.create(title=request.POST['title'], desc=request.POST['desc'], image='./images/bg2.jpg', user=request.user)
+            BlogModel.objects.create(title=request.POST['title'], desc=request.POST['desc'], image=request.FILES['image'], user=request.user)
         
       
       x=BlogModel.objects.order_by('-updatedtime')[:4]
