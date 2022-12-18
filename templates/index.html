@@ -1,104 +1,254 @@
 {% load static %}
 {%include "base.html"%}
 
-<div class="bg-image bgimg vh-100" style="background-image: url('{% static 'images/bg2.png' %}') ">
-  {% include "navbar.html" %}
-  <div class="container mt-5">
-    <div class="row align-items-center mx-auto justify-content-center">
-      <div class="col-8 h1 mt-5  text-start">
-        <h1 class="mt-5 mb-5 text-white">Blog Scribe </h1>
-        <h2 class="h3 text-white">Inscribe is the practice of making the best ideas <span class="d-sm-inline d-none">, <br> the most obvious.
-          Publish your passions in your own way. <br>
-          Create a unique and beautiful blog easily.</span></h2>
-      </div>
+{% include "navbar.html" %}
+
+
+<div class="container ccontainer mt-10 vh-100">
+
+
+  <div class="row login mt-10 my-auto align-item-center">
+
+    <div class="col-4 ">
+      <img src="{% static 'images/bg2.png' %}" alt="blog" class="img-fluid rounded">
+    </div> 
+    <div class="col-2">
+
+    </div>
+    <div class="col-5 my-auto">
+      <h1 class="mt-5 mb-5">BLOG SCRIBE </h1>
+      <h2 class="h3">Inscribe is the practice of making the best ideas <span
+          class="d-sm-inline d-none">,  the most obvious.
+          Publish your passions in your own way. 
+          Create a unique and beautiful blog easily.</span>
+      </h2>
+     
     </div>
   </div>
 </div>
-</div>
-
-  <section id="blog" class="mt-4">
-    <div class="container">
-      <div class="row align-items-center">
-        <!-- Heading -->
-        <h2>Blog Category List</h2>
-        <!-- End Heading -->
-        <div class="overflow-hidden">
-          <!-- Row Start-->
-          <div class="row">
 
 
-            <!-- The Modal -->
-            {% if request.user.is_authenticated %}
-            <button type="button" class="btn btnn-primary mb-4" data-bs-toggle="modal" data-bs-target="#myModal">
-              New Card
-            </button>
-            {% endif %}
-            <!-- Modal -->
-            <!-- The Modal -->
-            <div class="modal" id="myModal">
-              <div class="modal-dialog modal-xl">
-                <div class="modal-content">
 
-                  <!-- Modal Header -->
-                  <div class="modal-header">
-                    <h4 class="modal-title">Create Blog</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                  </div>
+<section id="blog" class="bg-primarys vh-100">
+  <div class="container ccontainer">
+    <div class="row align-items-center">
+      <!-- Heading -->
+      <h2 class="mt-lg-4 mb-lg-4 mt-5">Blog Category List</h2>
+      <!-- End Heading -->
+      <div class="overflow-hidden">
+        <!-- Row Start-->
+        <div class="row">
 
-                  <!-- Modal body -->
-                  <div class="modal-body">
-                    <form method="POST" enctype="multipart/form-data">
-                      {% csrf_token %}
-                      {{form}}
-                      {{form.media}}
 
-                  </div>
-
-                  <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" name='create-blog' data-bs-dismiss="modal">Create</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                  </div>
-                  </form>
-                </div>
-              </div>
+          <!-- The Modal -->
+          {% if request.user.is_authenticated %}
+          <div class="row text-end">
+            <div class="col"></div>
+            <div class="col-4 col-md-3">
+              <button type="button" class="btn btnn-primary mb-4 btn-lg" data-bs-toggle="modal"
+                data-bs-target="#myModal">
+                New Card
+              </button>
             </div>
 
-            
-            <!-- BlogModel -->
-            {% for x in blogModel %}
-            <div class="col-lg-3 col-sm-6 col-12">
+          </div>
 
-              <div class="item card rounded-7 mb-3 pb-2 overflow-hidden bg-primarys">
-                {% comment %} <img src="{% static 'images/bg2.png' %}" alt="blog"> {% endcomment %}
-                <img src="{{x.image.url }}" class="img-fluid" />
-                <div class="card-body text-left h-100">
-                  <h4 class="d-inline-block  card-text mb-0">{{x.title}}</h4>
-                  <p class="card-text">{{x.desc |truncatechars:64 | safe}}
-                  </p>
-                  <div class="row">
-                    <div class="col-6">
-                      <p class="card-text"> {{x.addedtime}}</p>
-                    </div>
+          {% endif %}
+          <!-- Modal -->
+          <!-- The Modal -->
+          <div class="modal" id="myModal">
+            <div class="modal-dialog modal-xl">
+              <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Create Blog</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                  <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form}}
+                    {{form.media}}
+
+                </div>
+
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-success" name='create-blog'
+                    data-bs-dismiss="modal">Create</button>
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- BlogModel -->
+          {% for x in blogModel %}
+          <div class="col-lg-3 col-sm-6 col-12 mt-lg-5">
+
+            <div class="item card rounded-7 mb-3 pb-2 overflow-hidden">
+              {% comment %} <img src="{% static 'images/bg2.png' %}" alt="blog"> {% endcomment %}
+              <img src="{{x.image.url }}" class="img-fluid" />
+              <div class="card-body text-left h-100">
+                <h4 class="d-inline-block  card-text mb-0">{{x.title}}</h4>
+                <p class="card-text">{{x.desc |truncatechars:64 | safe}}
+                </p>
+                <div class="row">
+                  <div class="col-6">
+                    <p class="card-text"> {{x.addedtime}}</p>
+                  </div>
+                  <div class="row  mt-3">
                     <div class="col-6">
                       <a href="{% url 'blog' x.id %}" class="btn btn-primary">More</a>
 
-                      {% if request.user == x.user %}
-                      <a href="{% url 'blog-delete' x.id %}" class="btn btn-danger">Delete</a>
-                      {% endif %}
                       {% comment %} <button class="btn btn-primary" type="button">Read
                         More</button> {% endcomment %}
                     </div>
+                    <div class="col-6">
+                      {% if request.user == x.user %}
+                      <a href="{% url 'blog-delete' x.id %}" class="btn btn-danger">Delete</a>
+                      {% endif %}
+                    </div>
                   </div>
+
                 </div>
               </div>
+            </div>
+
+          </div>
+          {% endfor %}
+          <div class="row text-end mt-4">
+            <div class="col"></div>
+            <div class="col-4 col-md-3">
+              <a class="btn btnn-primary btn-lg" href="{% url 'blogs' %}">Show more</a>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+{% comment %} About section {% endcomment %}
+<section id="about" class="about">
+  <div class="container ccontainer">
+
+    <div class="row align-items-center mt-7">
+      <!-- col -->
+      <div class="col-lg-6 col-12">
+        <!-- content -->
+        <div class="pe-lg-6 mt-3">
+          <div>
+
+            <h2 class="h1 fw-bold mt-3 mb-2">Who We Are ?</h2>
+            <p>website visitors ignoring your idea??prospectus not recognizing your skills? let us help you....</p>
+            <div class="mt-md-7 mt-9">
+              <img src="{% static 'images/about.jpg' %}" alt="..." class="img-fluid w-75 ">
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-12">
+        <div class="row mt-5 mt-lg-0">
+          <!--  item -->
+          <div class="col-md-6 col-12">
+            <div class="mb-3 rounded-7 shadow p-2 p-sm-3 bg-white">
+              <div class="avtar">
+                <img src="{% static 'images/1.jpg' %}" alt="..." class="img-fluid avatar rounded-circle w-100 ">
+              </div>
+              <h4 class="mt-1 mb-0"><a href="#">Rajia Kolleni</a></h4>
+              <p>Graduated in computer science, really passionate and excited what future awaits.....</p>
 
             </div>
-            {% endfor %}
-            <a class="btn btn-info" href="{% url 'blogs' %}">Show more</a>
+          </div>
+
+          <!--  item -->
+          <div class="col-md-6 col-12">
+            <div class="mb-3 rounded-7 shadow p-2 p-sm-3 bg-white">
+              <div class="avtar">
+                <img src="{% static 'images/1.jpg' %}" alt="..." class="img-fluid avatar rounded-circle w-100 ">
+              </div>
+              <h4 class="mt-1 mb-0"><a href="#">Febina Sheri</a></h4>
+              <p> Graduated in physics, excited to start career and I can't wait to what the future holds me....</p>
+
+            </div>
+          </div>
+          <!--  item -->
+          <div class="col-md-6 col-12">
+            <div class="mb-3 rounded-7 shadow p-2 p-sm-3 bg-white">
+              <div class="avtar">
+                <img src="{% static 'images/1.jpg' %}" alt="..." class="img-fluid avatar rounded-circle w-100 ">
+              </div>
+              <h4 class="mt-1 mb-0"><a href="#">Rashida V</a></h4>
+              <p>Graduated in computer science, looking for new ways to learn and to improve my skills.....</p>
+
+            </div>
+          </div>
+          <!--  item -->
+          <div class="col-md-6 col-12">
+            <div class="mb-3 rounded-7 shadow p-2 p-sm-3 bg-white">
+              <div class="avtar">
+                <img src="{% static 'images/1.jpg' %}" alt="..." class="img-fluid avatar rounded-circle w-100 ">
+              </div>
+              <h4 class="mt-1 mb-0"><a href="#">Musfira Shirin</a></h4>
+              <p>
+                graduated in computer science. Looking forward for making a difference in world.....</p>
+
+            </div>
           </div>
 
         </div>
 
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+{% comment %} contact section {% endcomment %}
+
+<section>
+  <div class="container ccontainer">
+
+    <div class="row mt-10">
+      <div class="col-6">
+        <h2>Contact us</h2>
+        <p>Feel free to contact us</p>
+        <form action="" method="post">
+          <div class="">
+            <div class="mb-3 position-relative">
+              <input type="text" class="form-control rounded-4 input" name="name" placeholder="Full Name">
+            </div>
+          </div>
+          <div class="">
+            <div class="mb-3 position-relative">
+              <input type="email" class="form-control rounded-4 input" name="email" placeholder="email">
+            </div>
+          </div>
+          <div class="">
+            <div class="mb-3 position-relative">
+              <textarea name="message" class="form-control rounded-4 input" id="" cols="30" rows="5"
+                placeholder="Your Messages"></textarea>
+
+            </div>
+          </div>
+
+
+          <input type="submit" class="btn btnn-primary">
+        </form>
+      </div>
+      <div class="col-6">
+        <img src="{% static 'images/contact.jpg' %}" class="img-fluid p-3" alt="">
+      </div>
+    </div>
+  </div>
+</section>

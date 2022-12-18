@@ -1,11 +1,12 @@
        {% load static %}
        {% include 'base.html'%}
        
-        <div class="container">
-            <div class="row">
+        <div class="container ccontainer">
+            {% include 'navbar.html'%}
+            <div class="row mt-7">
                 {% for x in blogs %}
                 <div class="col-4"> 
-                    <div class="item card rounded-7 mb-3 pb-2 overflow-hidden bg-primarys">
+                    <div class="item card rounded-7 mb-3 pb-2 overflow-hidden bg-primarys position-static">
                         {% comment %} <img src="{% static 'images/bg2.png' %}" alt="blog"> {% endcomment %}
                         <img src="{{x.image.url }}" class="img-fluid" />
                         <div class="card-body text-left h-100">
@@ -16,12 +17,19 @@
                                 <div class="col-6">
                                     <p class="card-text"> {{x.addedtime}}</p>
                                 </div>
-                                <div class="col-6">
-                                    <a href="{% url 'blog' x.id %}" class="btn btn-primary">Read</a>
-                                    {% if request.user == x.user %}
-                                    <a href="{% url 'blog-delete' x.id %}" class="btn btn-danger">Delete</a>
-                                    {% endif %}
-                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-6">
+                                      <a href="{% url 'blog' x.id %}" class="btn btn-primary">More</a>
+                
+                                      {% comment %} <button class="btn btn-primary" type="button">Read
+                                        More</button> {% endcomment %}
+                                    </div>
+                                    <div class="col-6">
+                                      {% if request.user == x.user %}
+                                      <a href="{% url 'blog-delete' x.id %}" class="btn btn-danger">Delete</a>
+                                      {% endif %}
+                                    </div>
+                                  </div>
                             </div>
                         </div>
                     </div>
